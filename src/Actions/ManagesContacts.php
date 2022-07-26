@@ -231,4 +231,15 @@ trait ManagesContacts
 
         $this->delete("contactTags/{$contactTag->id}");
     }
+
+    public function bulkImport(array $payload)
+    {
+        return $this->post(
+            "import/bulk_import",
+            [
+                'json' => $payload
+            ]
+        );
+    }
+
 }
