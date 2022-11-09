@@ -98,6 +98,22 @@ trait ManagesContacts
         return $result['contact'];
     }
 
+    public function addContactToList(int $contactId, int $listId, int $listStatus = 1)
+    {
+        return $this->transformCollection(
+            $this->post('contactLists', [
+                'json' => [
+                    'contactList' => [
+                        'list' => $listId,
+                        'contact' => $contactId,
+                        'status' => $listStatus,
+                    ]
+                ]
+            ]),
+            Contact::class
+        );
+    }
+
     public function updateContact(int $id, string $email, string $firstName, string $lastName, ?string $phone, array $fieldValues = [])
     {
         $result = $this->transformCollection(
